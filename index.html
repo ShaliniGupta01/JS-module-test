@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <script src="./app.js" defer></script>
+</head>
+
+<body class="app-body">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div>ROCK</div>
+                <div>PAPER</div>
+                <div>SCISSORS</div>
+            </div>
+            <div id="scoreBoard">
+                <div class="scoreboard">
+                    <div class="score-box">
+                        <div class="score-label">COMPUTER<br />SCORE</div>
+                        <div id="computerScore" class="score-value">0</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-label">YOUR<br />SCORE</div>
+                        <div id="playerScore" class="score-value">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME AREA -->
+        <div class="game-area">
+
+            <!-- Game Screen -->
+            <div id="gameScreen" class="game-screen">
+                <svg class="triangle-lines" fill="none" viewBox="0 0 350 300">
+                    <line x1="80" y1="150" x2="270" y2="150" />
+                    <line x1="80" y1="150" x2="175" y2="260" />
+                    <line x1="270" y1="150" x2="175" y2="260" />
+                </svg>
+
+                <div class="choice rock" data-choice="rock"><i class="fas fa-hand-fist"></i></div>
+                <div class="choice scissors" data-choice="scissors"><i class="fas fa-hand-scissors"></i></div>
+                <div class="choice paper" data-choice="paper"><i class="fas fa-hand"></i></div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="resultScreen" class="result-screen hidden">
+                <div class="result-choices">
+                    <div class="pick">
+                        <h3>YOU PICKED</h3>
+                        <div class="pick-box" id="playerPick"></div>
+                    </div>
+
+                    <div class="result-message" id="resultMessage"></div>
+
+                    <div class="pick">
+                        <h3>PC PICKED</h3>
+                        <div class="pick-box" id="computerPick"></div>
+                    </div>
+                </div>
+
+                <button id="playAgain" class="btn">PLAY AGAIN</button>
+            </div>
+
+            <!-- HURRAY / LOST / TIE Screens -->
+            <div id="hurrayScreen" class="end-screen hidden">
+                <div class="emoji">✨🏆✨</div>
+                <h2>HURRAY!!</h2>
+                <p>YOU WON THE GAME</p>
+                <button class="btn restartGame">PLAY AGAIN</button>
+            </div>
+
+            <div id="lostScreen" class="end-screen hidden">
+                <div class="emoji">😢</div>
+                <h2>YOU LOST!</h2>
+                <p>Better luck next time!</p>
+                <button class="btn restartGame">TRY AGAIN</button>
+            </div>
+
+            <div id="tieScreen" class="end-screen hidden">
+                <h2>IT'S A TIE!</h2>
+                <p>Both reached 15 points 🎯</p>
+                <button class="btn restartGame">PLAY AGAIN</button>
+            </div>
+
+            <!-- Buttons -->
+            <div class="bottom-right">
+                <div class="btn-outline" onclick="document.getElementById('rulesBox').classList.remove('hidden')">RULES</div>
+                <button id="nextButton" class="btn-outline hidden">NEXT</button>
+            </div>
+
+            <!-- Rules -->
+            <div id="rulesBox" class="rules-box hidden">
+                <div class="rules-header">
+                    <h2>Game Rules</h2>
+                    <button class="close-btn" onclick="document.getElementById('rulesBox').classList.add('hidden')">✕</button>
+                </div>
+                <ul class="rules-list">
+                    <li><span>■</span> Rock beats scissors, scissors beat paper, and paper beats rock.</li>
+                    <li><span>■</span> Play until someone reaches 15 points.</li>
+                    <li><span>■</span> If both pick same hand → it's a tie.</li>
+                    <li><span>■</span> Click "NEXT" to proceed after reaching 15 points.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
