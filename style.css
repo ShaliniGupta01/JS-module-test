@@ -1,132 +1,76 @@
-body.app-body {
-  background: #6cb44b;
+body {
+  margin: 0;
+  padding: 0;
+  background: #73b953;
+  font-family: "Roboto Mono", monospace;
   min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 24px;
-  font-family: "Roboto Mono", monospace;
+  align-items: center;
 }
-
-/* Static dark glowing ring */
-.glowing-circle {
-  position: relative;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.glow {
-  position: relative;
-  border-radius: 9999px;
-  z-index: 1;
-}
-.glow::before,
-.glow::after {
-  content: "";
-  position: absolute;
-  top: -14px;
-  left: -14px;
-  right: -14px;
-  bottom: -14px;
-  border-radius: 60%;
-  border: 50px solid #044a04; /* green */
-  box-shadow: 0 0 10px  #044a04, 0 0 40px  #044a04, 0 0 80px  #044a04,
-    0 0 120px  #044a04;
-  opacity: 0.3;
-  z-index: -1;
-  animation: glowRing 3s infinite ease-in-out;
-}
-
-.glow::after {
-  animation-delay: 1.5s;
-  opacity: 0.3;
-}
-
-@keyframes glowRing {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.5;
-  }
-
-  50% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(0.7);
-    opacity: 0.5;
-  }
-}
-
+/* #6CB44B; */
 .container {
   width: 100%;
   max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
 }
 
 /* Header */
 .header {
+  max-width: 900px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid white;
-  border-radius: 8px;
-  padding: 16px;
-  width: 100%;
-  margin-bottom: 48px;
+  border: 3px solid #fff;
+  border-radius: 12px;
+  padding: 18px 25px;
+  margin: 0 auto 50px auto;
 }
 
-body.show-end-screen .header,
-body.show-end-screen #scoreBoard {
-  display: none;
-}
-
-.logo {
+.title {
   color: white;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
   letter-spacing: 2px;
-  line-height: 1.2;
 }
 
-.scoreboard {
+.scores {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .score-box {
-  background: white;
+  background: #fff;
   border-radius: 8px;
   width: 130px;
   height: 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .score-label {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
   text-align: center;
-  color: black;
+  letter-spacing: 1px;
+  color: #555;
 }
 
 .score-value {
-  font-size: 38px;
-  font-weight: 800;
-  color: black;
+  font-size: 48px;
+  font-weight: 900;
+  color: #252525;
 }
 
-/* Game Area */
-.game-area {
+/* Game Screen */
+.game-rules {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 64px;
+  gap: 40px;
   position: relative;
 }
 
@@ -134,19 +78,13 @@ body.show-end-screen #scoreBoard {
   position: relative;
   width: 350px;
   height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.triangle-lines line {
-  stroke: #000;
-  stroke-width: 9;
-  stroke-linecap: round;
-}
-
-.triangle-lines .bottom-line {
-  transform: translateY(50px); /* match paper shift */
+.triangle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Choices */
@@ -154,60 +92,102 @@ body.show-end-screen #scoreBoard {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background: white;
+  background: #fff;
   border: 10px solid;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 48px;
-  color: black;
-  cursor: pointer;
+  align-items: center;
   position: absolute;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: glowRing 3s infinite ease-in-out; 
 }
 
-/* All choice icons */
 .choice i {
-  font-size: 40px; /* same as text-5xl */
-  color: black; /* same as text-black */
+  font-size: 40px;
+  color: #000;
 }
 
-.choice.rock {
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  border-color: #0b5ea4;
+/* ROCK - left vertex */
+.rock {
+  left: 50px;          /* match SVG x1 */
+  top: 150px;          /* match SVG y1 */
+  transform: translate(-50%, -50%);
+  border-color: #0B5EA4;
 }
-.choice.scissors {
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  border-color: #9b00ff;
+
+/* SCISSORS - right vertex */
+.scissors {
+  left: 300px;         /* match SVG x2 */
+  top: 150px;          /* match SVG y2 */
+  transform: translate(-50%, -50%);
+  border-color: #9B00FF;
 }
-.choice.paper {
-  left: 50%;
-  bottom: -50px;
-  transform: translateX(-50%);
-  border-color: #f9a825;
+
+/* PAPER - bottom vertex */
+.paper {
+  left: 175px;         /* match SVG bottom x */
+  top: 280px;          /* match SVG bottom y */
+  transform: translate(-50%, -50%);
+  border-color: #F9A825;
 }
+
+/* Winner Glow Animation */
+.glow {
+  animation: winnerGlow 1s infinite ease-in-out;
+}
+
+@keyframes winnerGlow {
+  0% {
+    box-shadow: 0 0 20px 5px rgb(93, 7, 206);
+  }
+  50% {
+    box-shadow: 0 0 30px 15px rgba(27, 68, 234, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 20px 5px rgba(10, 76, 230, 0.6);
+  }
+}
+
+
+/* Glow Animation */
+@keyframes glowRing {
+  0% {
+    box-shadow: 0 0 10px var(--glow-color), 0 0 40px var(--glow-color);
+  }
+
+  50% {
+    box-shadow: 0 0 80px var(--glow-color), 0 0 120px var(--glow-color);
+  }
+
+  100% {
+    box-shadow: 0 0 10px var(--glow-color), 0 0 40px var(--glow-color);
+  }
+}
+
 
 /* Result Screen */
 .result-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
-.result-choices {
+.result-row {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 40px;
 }
 
 .pick h3 {
-  color: white;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  /* font-size: 18px; */
+}
+
+.pick-box i {
+  font-size: 40px;           /* larger icon */
+  color: #000;
 }
 
 .pick-box {
@@ -215,24 +195,17 @@ body.show-end-screen #scoreBoard {
   height: 110px;
   border-radius: 50%;
   background: white;
-  border: 10px solid #333;
+  border: 10px solid black;
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.pick-box i {
-  font-size: 40px; /* same as .choice i */
-  color: black;
+  align-items: center;
 }
 
 .result-message {
-  color: white;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
-  width: 160px;
+  width: 150px;
 }
 
 /* End Screens */
@@ -240,114 +213,163 @@ body.show-end-screen #scoreBoard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
+  color: white;
   min-height: 400px;
 }
 
 .end-screen h2 {
   font-size: 32px;
   font-weight: bold;
-  color: white;
+}
+
+.end-screen h4 {
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .end-screen p {
   font-size: 20px;
-  color: white;
-}
-
-.emoji {
-  font-size: 64px;
 }
 
 /* Buttons */
 .btn {
+  
   background: white;
-  color: #6cb44b;
-  padding: 10px 24px;
-  border-radius: 6px;
+  color: #6CB44B;
   font-weight: bold;
-  cursor: pointer;
   border: none;
-}
-
-.btn-outline {
-  border: 2px solid white;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: white;
-  letter-spacing: 2px;
+  padding: 10px 20px;
+  border-radius: 6px;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1); /* slight transparent bg */
-  transition: 0.3s;
 }
 
-.btn-outline:hover {
-  background: white;
-  color: #6cb44b;
-}
-
-/* Fixed bottom-right buttons */
-.bottom-right {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
+/* Bottom Buttons */
+.bottom-buttons {
+  position: fixed;      /* change from absolute to fixed */
+  bottom: 20px;         /* distance from bottom of screen */
+  right: 20px;          /* distance from right of screen */
   display: flex;
-  flex-direction: row; /* RULES above NEXT */
-  gap: 12px;
-  z-index: 100;
+  gap: 15px;
+  z-index: 1000;        /* ensure it stays above other elements */
+}
+
+.rules-btn,
+.next-btn {
+  border: 2px solid #fff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 15px;
+  font-weight:bold;
 }
 
 /* Rules Box */
 .rules-box {
-  width: 320px;
-  background: #004f34;
-  border-radius: 8px;
-  padding: 24px;
+ width: 16rem;
+ height: 20rem;
+  background: #004F34;
+  border: 5px solid #fff;
+  border-radius: 1rem;
+  padding: 20px;
   color: white;
   font-size: 14px;
-  line-height: 1.4;
-  border: 2px solid white;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  position: relative;
+  left: 40px;
+  bottom: -50px;
+  z-index: 500;          /* above game screen but below buttons */
 }
+
+
 
 .rules-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.rules-header h2 {
-  font-size: 18px;
-  font-weight: bold;
+ 
+   padding-right: 40px;
+  margin-bottom: 10px;
 }
 
 .close-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   background: red;
+  border: 2px solid white;
+  border-radius: 50%;
   color: white;
-  font-weight: bold;
-  border: none;
+  font-size: large;
+  font-weight:bold;
   cursor: pointer;
+  position: absolute;   /* position relative to .rules-box */
+  top: -20px;            /* distance from top */
+  right: -20px;          /* distance from right */
+  z-index: 10;
 }
 
-.rules-list {
-  list-style: disc inside;
+.rules-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rules-box li {
+  margin-bottom: 15px;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 13px;
+  gap: 15px;
+  align-items: flex-start;
 }
 
-.rules-list span {
-  color: yellow;
-  margin-right: 8px;
+
+
+.dot {
+  width: 10px;              /* size of square */
+  height: 10px;
+  background: yellow;
+  border-radius: 0;         /* square */
+  flex-shrink: 0;           /* prevent shrinking */
+  margin-top: 4px;          /* aligns vertically with text */
 }
 
-/* Utilities */
 .hidden {
-  display: none !important;
+  display: none;
 }
+
+.emoji{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+/*  Hurray Screen Styling */
+#hurrayScreen .emoji {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 3rem;      
+  margin-bottom: 10px;
+}
+/* Make the cup stand out more */
+#hurrayScreen .emoji span.cup {
+  font-size: 10rem;        
+}
+
+#hurrayScreen h2 {
+  font-size: 4rem; 
+  font-weight: 900;  
+  color: #fff;       
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#hurrayScreen p {
+  font-size: 2rem; 
+  color: #fff;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
