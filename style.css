@@ -25,15 +25,13 @@ body.app-body {
   content: "";
   position: absolute;
   top: -14px;
-  /* Increased to spread the glow more */
   left: -14px;
   right: -14px;
   bottom: -14px;
   border-radius: 60%;
-  border: 50px solid var(--glow-color, #0a7d0c);
-  /* drop-shadow: 0 0 10px var(--glow-color); */
-  box-shadow: 0 0 10px var(--glow-color), 0 0 40px var(--glow-color),
-    0 0 80px var(--glow-color), 0 0 120px var(--glow-color);
+  border: 50px solid #044a04; /* green */
+  box-shadow: 0 0 10px  #044a04, 0 0 40px  #044a04, 0 0 80px  #044a04,
+    0 0 120px  #044a04;
   opacity: 0.3;
   z-index: -1;
   animation: glowRing 3s infinite ease-in-out;
@@ -85,7 +83,6 @@ body.show-end-screen .header,
 body.show-end-screen #scoreBoard {
   display: none;
 }
-
 
 .logo {
   color: white;
