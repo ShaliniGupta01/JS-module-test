@@ -1,4 +1,3 @@
-// Select elements
 const choices = document.querySelectorAll(".choice");
 const gameScreen = document.getElementById("gameScreen");
 const resultScreen = document.getElementById("resultScreen");
